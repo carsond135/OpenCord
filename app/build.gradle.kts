@@ -3,7 +3,7 @@ plugins {
     id("kotlin-android")
 }
 
-val composeVersion = "1.1.0~rc01"
+val composeVersion = "1.1.1"
 
 android {
     compileSdk = 31
@@ -83,12 +83,12 @@ android {
 
 dependencies {
     implementation("androidx.activity:activity-compose:1.4.0")
-    implementation("androidx.appcompat:appcompat:1.4.0")
+    implementation("androidx.appcompat:appcompat:1.4.1")
     implementation("androidx.core:core-ktx:1.7.0")
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.4.0")
-    implementation("androidx.preference:preference-ktx:1.1.1")
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.4.1")
+    implementation("androidx.preference:preference-ktx:1.2.0")
 
-    implementation("androidx.compose.compiler:compiler:1.1.0-rc02")
+    implementation("androidx.compose.compiler:compiler:1.2.0-alpha05")
     implementation("androidx.compose.foundation:foundation:$composeVersion")
     implementation("androidx.compose.material:material-icons-core:$composeVersion")
     implementation("androidx.compose.material:material-icons-extended:$composeVersion")
@@ -99,17 +99,17 @@ dependencies {
 
     implementation("io.coil-kt:coil-compose:1.4.0")
 
-    val accompanistVersion = "0.22.0-rc"
+    val accompanistVersion = "0.24.4-alpha"
     implementation("com.google.accompanist:accompanist-navigation-animation:$accompanistVersion")
     implementation("com.google.accompanist:accompanist-systemuicontroller:$accompanistVersion")
     implementation("com.google.accompanist:accompanist-insets:$accompanistVersion")
 
-    implementation("com.google.android.material:material:1.4.0")
-    implementation("com.google.code.gson:gson:2.8.9")
+    implementation("com.google.android.material:material:1.5.0")
+    implementation("com.google.code.gson:gson:2.9.0")
 
     implementation("com.github.hcaptcha:hcaptcha-android-sdk:1.1.0")
 
-    val exoplayerVersion = "2.16.0"
+    val exoplayerVersion = "2.17.1"
     implementation("com.google.android.exoplayer:exoplayer-core:$exoplayerVersion")
     implementation("com.google.android.exoplayer:exoplayer-dash:$exoplayerVersion")
     implementation("com.google.android.exoplayer:exoplayer-ui:$exoplayerVersion")
@@ -118,7 +118,7 @@ dependencies {
     implementation("com.squareup.retrofit2:retrofit:$retrofitVersion")
     implementation("com.squareup.retrofit2:converter-gson:$retrofitVersion")
 
-    val okHttpVersion = "4.9.1"
+    val okHttpVersion = "5.0.0-alpha.6"
     implementation("com.squareup.okhttp3:okhttp:$okHttpVersion")
     implementation("com.squareup.okhttp3:logging-interceptor:$okHttpVersion")
 
