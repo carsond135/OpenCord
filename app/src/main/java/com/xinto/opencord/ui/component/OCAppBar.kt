@@ -1,4 +1,4 @@
-package com.xinto.opencord.ui.component.appbar
+package com.xinto.opencord.ui.component
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
@@ -11,7 +11,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 @Composable
-fun AppBar(
+fun OCTopAppBar(
     modifier: Modifier = Modifier,
     title: @Composable () -> Unit,
     navigation: (@Composable () -> Unit)? = null,
