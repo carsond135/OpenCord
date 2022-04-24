@@ -1,22 +1,21 @@
 plugins {
     id("com.android.application")
     id("kotlin-android")
+    id("kotlin-parcelize")
     kotlin("plugin.serialization")
 }
 
-val composeVersion = "1.2.0-alpha07"
-
 android {
-    compileSdk = 31
+    compileSdk = 32
 
     flavorDimensions.add("api")
 
     defaultConfig {
         applicationId = "com.xinto.opencord"
         minSdk = 21
-        targetSdk = 31
+        targetSdk = 32
         versionCode = 1
-        versionName = "1.0"
+        versionName = "0.0.1"
 
         vectorDrawables {
             useSupportLibrary = true
@@ -27,7 +26,7 @@ android {
 
     buildTypes {
         getByName("release") {
-            isMinifyEnabled = false
+            isMinifyEnabled = true
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
     }
@@ -63,7 +62,10 @@ android {
     kotlinOptions {
         jvmTarget = "11"
         freeCompilerArgs = freeCompilerArgs +
-                "-Xopt-in=kotlin.RequiresOptIn"
+                "-Xopt-in=androidx.compose.foundation.ExperimentalFoundationApi" +
+                "-Xopt-in=androidx.compose.animation.ExperimentalAnimationApi" +
+                "-Xopt-in=androidx.compose.material.ExperimentalMaterialApi" +
+                "-Xopt-in=androidx.compose.material3.ExperimentalMaterial3Api"
     }
 
     buildFeatures {
@@ -71,7 +73,7 @@ android {
     }
 
     composeOptions {
-        kotlinCompilerExtensionVersion = composeVersion
+        kotlinCompilerExtensionVersion = Dependencies.Compose.version
     }
 
     packagingOptions {
@@ -82,44 +84,19 @@ android {
 }
 
 dependencies {
-    implementation("androidx.activity:activity-compose:1.4.0")
-    implementation("androidx.appcompat:appcompat:1.4.1")
-    implementation("androidx.core:core-ktx:1.7.0")
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.4.1")
-    implementation("androidx.preference:preference-ktx:1.2.0")
+    implementation(project(":bottom-dialog-compose"))
+    implementation(project(":overlapping-panels-compose"))
+    implementation(project(":simpleast-compose"))
 
-    implementation("androidx.compose.compiler:compiler:$composeVersion")
-    implementation("androidx.compose.foundation:foundation:$composeVersion")
-    implementation("androidx.compose.material:material-icons-core:$composeVersion")
-    implementation("androidx.compose.material:material-icons-extended:$composeVersion")
-    implementation("androidx.compose.material:material:$composeVersion")
-    implementation("androidx.compose.ui:ui-tooling-preview:$composeVersion")
-    implementation("androidx.compose.ui:ui-util:$composeVersion")
-    implementation("androidx.compose.ui:ui:$composeVersion")
-
-    implementation("io.coil-kt:coil-compose:1.4.0")
-
-    val accompanistVersion = "0.24.5-alpha"
-    implementation("com.google.accompanist:accompanist-navigation-animation:$accompanistVersion")
-    implementation("com.google.accompanist:accompanist-systemuicontroller:$accompanistVersion")
-
-    implementation("com.google.android.material:material:1.5.0")
-
-    implementation("com.github.hcaptcha:hcaptcha-android-sdk:1.1.0")
-
-    val exoplayerVersion = "2.16.0"
-    implementation("com.google.android.exoplayer:exoplayer-core:$exoplayerVersion")
-    implementation("com.google.android.exoplayer:exoplayer-dash:$exoplayerVersion")
-    implementation("com.google.android.exoplayer:exoplayer-ui:$exoplayerVersion")
-
-    val ktorVersion = "2.0.0-beta-1"
-    implementation("io.ktor:ktor-client-core:$ktorVersion")
-    implementation("io.ktor:ktor-client-cio:$ktorVersion")
-    implementation("io.ktor:ktor-client-websockets:$ktorVersion")
-    implementation("io.ktor:ktor-client-content-negotiation:$ktorVersion")
-    implementation("io.ktor:ktor-serialization-kotlinx-json:$ktorVersion")
-
-    implementation("com.github.X1nto:OverlappingPanelsCompose:1.2.0")
-
-    implementation("io.insert-koin:koin-androidx-compose:3.1.5")
+    Dependencies.Koin(this)
+    Dependencies.Ktor(this)
+    Dependencies.KotlinXDatetime(this)
+    Dependencies.HCaptcha(this)
+    Dependencies.AndroidxCore(this)
+    Dependencies.AndroidxPreferences(this)
+    Dependencies.Material(this)
+    Dependencies.Compose(this)
+    Dependencies.Accompanist(this)
+    Dependencies.Coil(this)
+    Dependencies.ExoPlayer(this)
 }
