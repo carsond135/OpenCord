@@ -15,9 +15,22 @@ public abstract class Rule<RC, T : Node<RC>, S>(
         matcher.reset(inspectionSource)
         return if (matcher.find()) matcher else null
     }
-
     public abstract fun parse(
         matcher: Matcher,
-        parser: Parser<RC, in T>
-    )
+        parser: Parser<RC, in T, S>, state: S,
+    ): ParseSpec<RC, S>
+    public abstract class BlockRule<R, T : Node<R>, S>(
+        pattern: Pattern,
+    ) : Rule<R, T, S>(pattern) {
+        override fun match(
+            inspectionSource: CharSequence,
+            lastCapture: String?,
+            state: S,
+        ): Matcher? {
+            if (lastCapture?.endsWith('\n') != false) {
+                return super.match(inspectionSource, lastCapture, state)
+            }
+            return null
+        }
+    }
 }
