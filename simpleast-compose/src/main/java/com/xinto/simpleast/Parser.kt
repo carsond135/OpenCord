@@ -12,7 +12,9 @@ public inline fun <RC, T : Node<RC>, S> createParser(
 }
 
 public class Parser<RC, T : Node<RC>, S> {
+
     private val rules = ArrayList<Rule<RC, out T, S>>()
+
     public fun parse(
         source: CharSequence,
         initialState: S,
@@ -90,12 +92,15 @@ public class Parser<RC, T : Node<RC>, S> {
     }
 
     public inner class RuleScope {
+
         public fun rule(newRule: Rule<RC, out T, S>) {
             rules.add(newRule)
         }
+
         public fun rules(vararg newRules: Rule<RC, out T, S>) {
             rules(newRules.toList())
         }
+
         public fun rules(newRules: List<Rule<RC, out T, S>>) {
             rules.addAll(newRules)
         }

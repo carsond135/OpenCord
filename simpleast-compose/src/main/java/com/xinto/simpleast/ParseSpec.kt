@@ -7,12 +7,14 @@ public class ParseSpec<RC, S> private constructor(
     public var startIndex: Int,
     public var endIndex: Int,
 ) {
+
     public fun applyOffset(offset: Int) {
         startIndex += offset
         endIndex += offset
     }
 
     public companion object {
+
         public fun <RC, S> createNonTerminal(
             node: Node<RC>,
             state: S,
