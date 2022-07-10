@@ -4,11 +4,11 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class ApiChannel(
+data class ApiAttachment(
     @SerialName("id")
-    val id: String,
+    val id: ApiSnowflake,
 
-    @SerialName("name")
+    @SerialName("filename")
     val filename: String,
 
     @SerialName("size")
@@ -21,10 +21,10 @@ data class ApiChannel(
     val proxyUrl: String,
 
     @SerialName("width")
-    val width: Int?,
+    val width: Int? = null,
 
     @SerialName("height")
-    val height: Int?,
+    val height: Int? = null,
 
     @SerialName("content_type")
     val contentType: String = ""
