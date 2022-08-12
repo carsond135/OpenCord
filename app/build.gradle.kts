@@ -29,6 +29,7 @@ android {
     buildTypes {
         release {
             isMinifyEnabled = true
+            isShrinkResources = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
@@ -44,7 +45,11 @@ android {
 
             buildConfigField("String", "URL_API", "\"https://discord.com/api/v9\"")
             buildConfigField("String", "URL_CDN", "\"https://cdn.discordapp.com\"")
-            buildConfigField("String", "URL_GATEWAY", "\"wss://gateway.discord.gg/?v=9&encoding=json&compress=zlib-stream\"")
+            buildConfigField(
+                "String",
+                "URL_GATEWAY",
+                "\"wss://gateway.discord.gg/?v=9&encoding=json&compress=zlib-stream\""
+            )
         }
 
         create("fosscord") {
@@ -55,7 +60,11 @@ android {
 
             buildConfigField("String", "URL_API", "\"https://api.fosscord.com/api/v9\"")
             buildConfigField("String", "URL_CDN", "\"https://cdn.fosscord.com\"")
-            buildConfigField("String", "URL_GATEWAY", "\"wss://gateway.fosscord.com/?v=9&encoding=json&compress=zlib-stream\"")
+            buildConfigField(
+                "String",
+                "URL_GATEWAY",
+                "\"wss://gateway.fosscord.com/?v=9&encoding=json&compress=zlib-stream\""
+            )
         }
     }
 
@@ -82,9 +91,27 @@ android {
         kotlinCompilerExtensionVersion = Dependencies.Compose.version
     }
 
+    androidComponents {
+        onVariants(selector().withBuildType("release")) {
+            it.packaging.resources.excludes.apply {
+                add("/**/*.version")
+                add("/kotlin-tooling-metadata.json")
+                add("/DebugProbesKt.bin")
+            }
+        }
+    }
+
     packagingOptions {
         resources {
-            excludes += "/META-INF/{AL2.0,LGPL2.1}"
+            excludes += "/AUTHORS"
+            excludes += "/latestchanges.html"
+            excludes += "/release-timestamp.txt"
+            excludes += "/changelog.txt"
+            excludes += "/README.md"
+            excludes += "/lombok/**"
+            excludes += "/**/*.lombok"
+            excludes += "/**/*.kotlin_builtins"
+            excludes += "/okhttp3/**"
         }
     }
 
@@ -94,10 +121,6 @@ android {
                 kotlin.srcDir("build/generated/ksp/$name/kotlin")
             }
         }
-    }
-
-    kotlin {
-
     }
 }
 
