@@ -38,5 +38,10 @@ object Timestamp : KoinComponent {
 
         if (isToday)
             return context.getString(R.string.timestamp_today, timeOnlyFormat.format(date))
+
+        if (isYesterday)
+            return context.getString(R.string.timestamp_yesterday, timeOnlyFormat.format(date))
+
+        return dateOnlyFormat.format(date)
     }
 }
