@@ -125,6 +125,7 @@ sealed class Dependencies {
         override fun invoke(scope: DependencyHandlerScope) {
             scope {
                 implementation(systemUiController)
+                implementation(placeholder)
             }
         }
     }
